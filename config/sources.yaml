@@ -1,0 +1,16 @@
+unit_scales:
+  units: '1'
+  thousands: '1000'
+fx_max_age_days: 0
+fx_pairs:
+  GBP: {pair: GBPUSD, inverse: false}
+  EUR: {pair: EURUSD, inverse: false}
+instruments:
+  - {pattern: '^US Treasury 5Y$', region: US, series: [UST_5Y, UST_2Y, UST_10Y, UST_30Y]}
+  - {pattern: '^US Treasury 30Y$', region: US, series: [UST_30Y, UST_2Y, UST_5Y, UST_10Y]}
+  - {pattern: '^US Treasury 10Y$', region: US, series: [UST_10Y, SOFR_SWAP_10Y, UST_2Y, UST_5Y, UST_30Y]}
+  - {pattern: '^USD SOFR swap .*10Y$', region: US, series: [SOFR_SWAP_10Y, UST_10Y]}
+  - {pattern: '^UK Gilt 10Y$', region: UK, series: [GILT_10Y, SONIA_SWAP_10Y]}
+  - {pattern: '^UK Gilt 30Y$', region: UK, series: [GILT_30Y]}
+  - {pattern: '^GBP SONIA swap .*10Y$', region: UK, series: [SONIA_SWAP_10Y, GILT_10Y]}
+  - {pattern: '^German Bund 10Y$', region: Euro area, series: [BUND_10Y]}

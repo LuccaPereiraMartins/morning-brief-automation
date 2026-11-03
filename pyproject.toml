@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rates-brief"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.10,<3", "PyYAML>=6,<7", "jsonschema>=4,<5", "mcp>=1.12,<2", "openai>=1.60,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9", "mypy>=1.14", "types-PyYAML", "types-jsonschema"]
+
+[tool.setuptools.packages.find]
+include = ["rates_brief*"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
