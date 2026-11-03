@@ -1,0 +1,5 @@
+book,curve_bucket,limit_type,limit,limit_ccy
+RATES_RV,5Y,abs_net_dv01,100000,USD
+RATES_RV,10Y,abs_net_dv01,120000,USD
+RATES_RV,30Y,abs_net_dv01,50000,USD
+RATES_RV,TOTAL,abs_net_dv01,150000,USD

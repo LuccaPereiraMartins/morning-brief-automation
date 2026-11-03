@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AuditEvent",
+  "type": "object",
+  "required": ["event_id", "timestamp", "user_id", "request_id", "event_type", "app", "app_version"],
+  "properties": {
+    "event_id": { "type": "string", "description": "Unique ID for this event" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string", "description": "End user the request runs as" },
+    "request_id": { "type": "string", "description": "Groups all events for one user request" },
+    "event_type": {
+      "type": "string",
+      "enum": ["user_request", "tool_call", "document_retrieved", "model_call", "response", "error"]
+    },
+    "app": { "type": "string" },
+    "app_version": { "type": "string" },
+    "detail": {
+      "type": "object",
+      "description": "Event-specific content, e.g. tool name and arguments, document IDs, model name and token counts, response text",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

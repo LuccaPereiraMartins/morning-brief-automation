@@ -1,0 +1,23 @@
+# Users, the books they can see, and which brokers' research they are licensed to read.
+# Research licences are held per user (each user's access to paid research is recorded individually).
+users:
+  tom:
+    role: Portfolio Manager, Rates pod
+    pod: rates
+    books: [RATES_RV]
+    research_licences: [Bank A, Bank B, Bank C, Internal]
+  jim:
+    role: Junior Trader, Rates pod
+    pod: rates
+    books: [RATES_RV]
+    research_licences: [Bank A, Internal]
+  sara:
+    role: Portfolio Manager, EM pod
+    pod: em
+    books: [EM_SOV]
+    research_licences: [Bank A, Bank B, Internal]
+  priya:
+    role: Analyst, EM pod
+    pod: em
+    books: [EM_SOV]
+    research_licences: [Bank A, Bank B, Internal]
