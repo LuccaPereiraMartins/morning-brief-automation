@@ -10,6 +10,10 @@ from jsonschema import Draft202012Validator, FormatChecker
 from rates_brief import __version__
 
 
+class AuditWriteError(RuntimeError):
+    """A request cannot succeed without durable local audit events."""
+
+
 class Audit:
     def __init__(self, directory: Path, schema: Path, user: str, request_id: str):
         UUID(request_id)
@@ -32,9 +36,12 @@ class Audit:
             "detail": detail,
         }
         self.validator.validate(event)
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        # One request runs its client and server writes sequentially.
-        with self.path.open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps(event, ensure_ascii=False) + "\n")
-            stream.flush()
-            os.fsync(stream.fileno())
+        try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            # One request runs its client and server writes sequentially.
+            with self.path.open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps(event, ensure_ascii=False) + "\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+        except OSError as exc:
+            raise AuditWriteError("Could not persist audit event") from exc
