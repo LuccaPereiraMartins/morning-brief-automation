@@ -1,0 +1,11 @@
+[
+  {"name": "tom", "user": "tom", "documents": ["2026-10-28_bank-a_ust-weekly", "2026-10-28_bank-b_gilts-boe-preview", "2026-10-28_bank-c_eur-swap-spreads", "2026-10-28_internal_rates-strategy"]},
+  {"name": "jim", "user": "jim", "documents": ["2026-10-28_bank-a_ust-weekly", "2026-10-28_internal_rates-strategy"]},
+  {"name": "total_breach", "user": "tom", "scenario_bucket": "10Y", "delta": "20000", "documents": ["2026-10-28_bank-a_ust-weekly", "2026-10-28_bank-b_gilts-boe-preview", "2026-10-28_bank-c_eur-swap-spreads", "2026-10-28_internal_rates-strategy"]},
+  {"name": "unknown_user", "user": "unknown", "denied": true},
+  {"name": "wrong_book", "user": "sara", "denied": true},
+  {"name": "missing_fx", "user": "tom", "mutation": "missing_fx", "denied": true},
+  {"name": "stale_fx", "user": "tom", "mutation": "stale_fx", "denied": true},
+  {"name": "duplicate_position", "user": "tom", "mutation": "duplicate", "denied": true},
+  {"name": "missing_limit", "user": "tom", "mutation": "missing_limit", "denied": true}
+]

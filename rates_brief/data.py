@@ -171,7 +171,9 @@ class Data:
                     or meta["region"] not in regions
                 ):
                     continue
-                body = stream.read().strip()
+                remaining = stream.read().splitlines()
+                first_text = next((i for i, text in enumerate(remaining) if text.strip()), 0)
+                body = "\n".join(remaining).strip()
             documents.append(
                 Document(
                     document_id=path.stem,
@@ -179,7 +181,7 @@ class Data:
                     provider=meta["source"],
                     region=meta["region"],
                     body=body,
-                    source=self.source(path, len(header) + 3, as_of),
+                    source=self.source(path, len(header) + 3 + first_text, as_of),
                 )
             )
         return Research(documents=documents, licences=self.identity["research_licences"])

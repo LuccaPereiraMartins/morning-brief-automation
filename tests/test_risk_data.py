@@ -73,6 +73,9 @@ def test_research_and_access(settings: Settings) -> None:
         docs = data.research("RATES_RV", DAY, ["US", "UK", "Euro area", "Global"]).documents
         assert {d.provider for d in docs} == expected
         assert all(d.source.as_of == DAY for d in docs)
+        for doc in docs:
+            lines = (settings.data_dir / doc.source.path).read_text().splitlines()
+            assert lines[doc.source.row - 1] == doc.body.splitlines()[0]
         assert not any("jgb" in d.document_id or "2026-10-21" in d.document_id for d in docs)
     with pytest.raises(PermissionError):
         Data(settings, "unknown")

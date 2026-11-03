@@ -1,0 +1,11 @@
+*
+!pyproject.toml
+!uv.lock
+!rates_brief/
+!rates_brief/*.py
+!config/
+!config/*.yaml
+!data/
+!data/**
+!evals/
+!evals/cases.json
