@@ -7,6 +7,8 @@ from pydantic import Field
 
 from rates_brief.models import Record
 
+DEFAULT_WARNING_UTILIZATION = Decimal("0.90")
+
 
 class FXPair(Record):
     pair: str
@@ -32,6 +34,7 @@ class Settings(Record):
     audit_dir: Path
     llm_mode: str
     llm_model: str
+    limit_warning_utilization: Decimal = Field(default=DEFAULT_WARNING_UTILIZATION, gt=0, le=1)
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -41,6 +44,9 @@ class Settings(Record):
             audit_dir=Path(os.getenv("AUDIT_DIR", "audit")).resolve(),
             llm_mode=os.getenv("LLM_MODE", "live" if os.getenv("OPENAI_API_KEY") else "offline"),
             llm_model=os.getenv("LLM_MODEL", ""),
+            limit_warning_utilization=Decimal(
+                os.getenv("LIMIT_WARNING_UTILIZATION", str(DEFAULT_WARNING_UTILIZATION))
+            ),
         )
 
     def conventions(self) -> Conventions:

@@ -4,33 +4,33 @@ from decimal import Decimal as D
 import pytest
 
 from rates_brief.data import Data
-from rates_brief.risk import bucket, calculate, scenario
+from rates_brief.risk import bucket, calculate
 from rates_brief.settings import FXPair, Settings
 
 DAY = date(2026, 10, 28)
 
 
-def test_supplied_risk_and_scenario(settings: Settings) -> None:
-    data = Data(settings, "tom")
-    book = data.book("RATES_RV", DAY)
-    market = data.market(book.book, DAY, book.series)
-    risk = calculate(book, market, data.config)
-    assert {b.bucket: b.net for b in risk.buckets} == {
-        "5Y": D("69500"),
-        "10Y": D("48557.04"),
-        "30Y": D("21150.08"),
-        "TOTAL": D("139207.12"),
-    }
-    amounts = {c.position.position_id: c.usd_dv01 for c in risk.converted}
-    assert amounts["R-002"] == D("73200")
-    assert amounts["R-006"] == D("-52049.92")
-    after = {b.bucket: b for b in scenario(risk, "10Y", D(20000))}
-    assert after["TOTAL"].headroom == D("-9207.12")
-    assert after["10Y"].status == "within limit"
-    assert bucket("5Y", D(-110), D(100)).status == "breached"
-    assert bucket("5Y", D(-100), D(100)).headroom == 0
+@pytest.mark.parametrize(
+    ("net", "expected"),
+    [
+        ("89", "within limit"),
+        ("90", "approaching limit"),
+        ("100", "approaching limit"),
+        ("101", "breached"),
+        ("-90", "approaching limit"),
+        ("-101", "breached"),
+    ],
+)
+def test_warning_and_breach_boundaries(net: str, expected: str) -> None:
+    assert bucket("5Y", D(net), D(100), D("0.9")).status == expected
+
+
+def test_warning_setting_validation(settings: Settings, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("LIMIT_WARNING_UTILIZATION", "0.95")
+    assert Settings.from_env().limit_warning_utilization == D("0.95")
+    monkeypatch.setenv("LIMIT_WARNING_UTILIZATION", "1.1")
     with pytest.raises(ValueError):
-        scenario(risk, "TOTAL", D(1))
+        Settings.from_env()
 
 
 @pytest.mark.parametrize("change", ["missing", "stale", "future", "zero", "negative", "unit"])

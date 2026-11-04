@@ -35,9 +35,6 @@ def render(
     research: Research,
     risk: Risk,
     model: ModelResult,
-    hypothetical: list[Bucket] | None = None,
-    scenario_bucket: str | None = None,
-    delta: Decimal | None = None,
 ) -> str:
     out = [
         f"# Rates morning brief — {safe(user)}",
@@ -62,6 +59,10 @@ def render(
             "",
             *risk_table(risk.buckets),
             "",
+            f"Warning at {risk.warning_utilization:.1%} utilization "
+            "(configurable demonstration assumption; confirm with the PM). "
+            "This flag reflects the supplied snapshot; it does not send a notification.",
+            "",
             "DV01 is USD profit/loss for a one-basis-point fall in yields. "
             "Limits apply to absolute net DV01. Total nets all signed position exposures.",
             "",
@@ -80,16 +81,6 @@ def render(
         "they do not establish protection against independent curve moves.",
         "",
     ]
-    if hypothetical is not None:
-        out += [
-            "## Hypothetical exposure change",
-            "",
-            f"Add **{money(delta or Decimal(0))} USD DV01** to **{scenario_bucket}**. "
-            "This is an exposure scenario, not a security quantity or an order.",
-            "",
-            *risk_table(hypothetical),
-            "",
-        ]
     out += [
         "## Market closes",
         "",
