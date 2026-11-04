@@ -105,15 +105,15 @@ def render(
         "",
         "USD DV01 = raw DV01 × unit scale × USD per currency; signs are preserved.",
         "",
-        "| Position | Raw / currency / unit | Scale | FX quote | USD DV01 | Sources |",
-        "|---|---|---:|---|---:|---|",
+        "| Position | Raw / currency / unit | FX quote | USD DV01 | Sources |",
+        "|---|---|---|---:|---|",
     ]
     for c in risk.converted:
         p = c.position
         refs = source(p.source) + ("; " + source(c.fx_source) if c.fx_source else "; USD identity")
         out.append(
             f"| {p.position_id} | {p.dv01} / {p.dv01_ccy} / {p.dv01_unit} | "
-            f"{c.scale} | {c.fx_pair}={c.fx_rate}{' (inverse)' if c.inverse else ''} | "
+            f"{c.fx_pair}={c.fx_rate}{' (inverse)' if c.inverse else ''} | "
             f"{money(c.usd_dv01)} | {refs} |"
         )
     out += [

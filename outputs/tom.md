@@ -57,16 +57,16 @@ Research references (quotes are broker views, not official closes):
 
 USD DV01 = raw DV01 × unit scale × USD per currency; signs are preserved.
 
-| Position | Raw / currency / unit | Scale | FX quote | USD DV01 | Sources |
-|---|---|---:|---|---:|---|
-| R-001 | 69500 / USD / units | 1 | USD/USD=1 | 69,500.00 | `positions/rates_rv_2026-10-28.csv:2` (2026-10-28); USD identity |
-| R-002 | 73.2 / USD / thousands | 1000 | USD/USD=1 | 73,200.00 | `positions/rates_rv_2026-10-28.csv:3` (2026-10-28); USD identity |
-| R-003 | 168000 / USD / units | 1 | USD/USD=1 | 168,000.00 | `positions/rates_rv_2026-10-28.csv:4` (2026-10-28); USD identity |
-| R-004 | -152300 / USD / units | 1 | USD/USD=1 | -152,300.00 | `positions/rates_rv_2026-10-28.csv:5` (2026-10-28); USD identity |
-| R-005 | 51800 / GBP / units | 1 | GBPUSD=1.3312 | 68,956.16 | `positions/rates_rv_2026-10-28.csv:6` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
-| R-006 | -39100 / GBP / units | 1 | GBPUSD=1.3312 | -52,049.92 | `positions/rates_rv_2026-10-28.csv:7` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
-| R-007 | -50400 / GBP / units | 1 | GBPUSD=1.3312 | -67,092.48 | `positions/rates_rv_2026-10-28.csv:8` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
-| R-008 | 26700 / EUR / units | 1 | EURUSD=1.1608 | 30,993.36 | `positions/rates_rv_2026-10-28.csv:9` (2026-10-28); `market_data/fx_rates.csv:3` (2026-10-28) |
+| Position | Raw / currency / unit | FX quote | USD DV01 | Sources |
+|---|---|---|---:|---|
+| R-001 | 69500 / USD / units | USD/USD=1 | 69,500.00 | `positions/rates_rv_2026-10-28.csv:2` (2026-10-28); USD identity |
+| R-002 | 73.2 / USD / thousands | USD/USD=1 | 73,200.00 | `positions/rates_rv_2026-10-28.csv:3` (2026-10-28); USD identity |
+| R-003 | 168000 / USD / units | USD/USD=1 | 168,000.00 | `positions/rates_rv_2026-10-28.csv:4` (2026-10-28); USD identity |
+| R-004 | -152300 / USD / units | USD/USD=1 | -152,300.00 | `positions/rates_rv_2026-10-28.csv:5` (2026-10-28); USD identity |
+| R-005 | 51800 / GBP / units | GBPUSD=1.3312 | 68,956.16 | `positions/rates_rv_2026-10-28.csv:6` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
+| R-006 | -39100 / GBP / units | GBPUSD=1.3312 | -52,049.92 | `positions/rates_rv_2026-10-28.csv:7` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
+| R-007 | -50400 / GBP / units | GBPUSD=1.3312 | -67,092.48 | `positions/rates_rv_2026-10-28.csv:8` (2026-10-28); `market_data/fx_rates.csv:2` (2026-10-28) |
+| R-008 | 26700 / EUR / units | EURUSD=1.1608 | 30,993.36 | `positions/rates_rv_2026-10-28.csv:9` (2026-10-28); `market_data/fx_rates.csv:3` (2026-10-28) |
 
 Currency contributions (USD/bp): EUR: 30,993.36; GBP: -50,186.24; USD: 158,400.00
 

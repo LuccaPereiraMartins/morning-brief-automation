@@ -2,10 +2,14 @@
 
 Generate Rates research briefs with per-user licences, sourced DV01 calculations and limit warnings.
 Requires Python 3.13 and [uv](https://docs.astral.sh/uv/).
+On another machine, clone the repository and copy your `.env` for live access; environments,
+audit logs and caches are recreated locally. No files from this machine's `.venv` are needed.
 
 ## Run
 
 ```sh
+git clone https://github.com/LuccaPereiraMartins/morning-brief-automation.git
+cd morning-brief-automation
 uv sync --frozen --extra dev
 uv run --frozen python -m rates_brief --user tom --as-of 2026-10-28 --output outputs/tom.md
 uv run --frozen python -m rates_brief --user jim --as-of 2026-10-28 --output outputs/jim.md
