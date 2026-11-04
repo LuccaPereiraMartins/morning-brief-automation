@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-04T21:30:09.855906+00:00",
-  "mode": "offline",
+  "timestamp": "2026-11-04T22:39:27.136328+00:00",
+  "mode": "live",
   "threshold": 1.0,
   "passed": true,
   "pass_rate": 1.0,
@@ -9,22 +9,22 @@
     {
       "name": "tom",
       "passed": true,
-      "model_mode": "offline stub"
+      "model_mode": "live"
     },
     {
       "name": "jim",
       "passed": true,
-      "model_mode": "offline stub"
+      "model_mode": "live"
     },
     {
       "name": "total_limit_breach",
       "passed": true,
-      "model_mode": "offline stub"
+      "model_mode": "live"
     },
     {
       "name": "configured_warning",
       "passed": true,
-      "model_mode": "offline stub"
+      "model_mode": "live"
     }
   ]
 }

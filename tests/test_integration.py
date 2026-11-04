@@ -30,7 +30,11 @@ def test_both_briefs_and_audit(settings: Settings, tmp_path: Path) -> None:
         for event in events:
             validator.validate(event)
             assert event["user_id"] == user and event["request_id"] == request_id
-        assert events[-1]["detail"]["markdown"] == output.read_text(encoding="utf-8")
+        report = output.read_text(encoding="utf-8")
+        assert events[-1]["detail"]["markdown"] == report
+        assert len(report.split("<details>")[0].splitlines()) < 30
+        assert "DV01 conversions and audit" in report
+        assert any(e["detail"].get("executed") is False for e in events)
         assert {
             e["detail"]["provider"] for e in events if e["event_type"] == "document_retrieved"
         } == providers
@@ -56,3 +60,11 @@ def test_audit_failure_prevents_report(settings: Settings, tmp_path: Path) -> No
     with pytest.raises(AuditWriteError):
         generate("tom", date(2026, 10, 28), output, settings)
     assert not output.exists()
+
+
+def test_denied_users_receive_no_report(settings: Settings, tmp_path: Path) -> None:
+    for user in ("unknown", "sara"):
+        output = tmp_path / f"{user}.md"
+        with pytest.raises(PermissionError):
+            generate(user, date(2026, 10, 28), output, settings)
+        assert not output.exists()
