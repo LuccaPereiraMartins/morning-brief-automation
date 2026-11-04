@@ -9,11 +9,11 @@ from uuid import uuid4
 from rates_brief.audit import Audit
 from rates_brief.data import Data
 from rates_brief.llm import summarize
+from rates_brief.mcp import SharedDataTools
 from rates_brief.models import Record, Research
 from rates_brief.report import render
 from rates_brief.risk import calculate
 from rates_brief.settings import Settings
-from rates_brief.tools import SharedDataTools
 
 T = TypeVar("T", bound=Record)
 
