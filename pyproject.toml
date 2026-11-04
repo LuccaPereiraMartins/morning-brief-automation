@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "rates-brief"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["pydantic>=2.10,<3", "PyYAML>=6,<7", "jsonschema>=4,<5", "mcp>=1.12,<2", "openai>=1.60,<4"]
+dependencies = ["pydantic>=2.10,<3", "PyYAML>=6,<7", "jsonschema>=4,<5", "openai>=1.60,<4"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9", "mypy>=1.14", "types-PyYAML", "types-jsonschema"]

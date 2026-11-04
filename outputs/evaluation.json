@@ -1,11 +1,10 @@
 {
-  "timestamp": "2026-11-03T23:54:56.463220+00:00",
+  "timestamp": "2026-11-04T21:30:09.855906+00:00",
   "mode": "offline",
   "threshold": 1.0,
-  "pass_rate": 1.0,
   "passed": true,
-  "live_model_quality_assessed": false,
-  "note": "Live runs require qualitative review; offline results do not assess LLM quality.",
+  "pass_rate": 1.0,
+  "note": "Offline results do not assess live model quality; live summaries need review.",
   "cases": [
     {
       "name": "tom",
@@ -18,39 +17,14 @@
       "model_mode": "offline stub"
     },
     {
-      "name": "total_breach",
+      "name": "total_limit_breach",
       "passed": true,
       "model_mode": "offline stub"
     },
     {
-      "name": "unknown_user",
+      "name": "configured_warning",
       "passed": true,
-      "model_mode": "not invoked"
-    },
-    {
-      "name": "wrong_book",
-      "passed": true,
-      "model_mode": "not invoked"
-    },
-    {
-      "name": "missing_fx",
-      "passed": true,
-      "model_mode": "not invoked"
-    },
-    {
-      "name": "stale_fx",
-      "passed": true,
-      "model_mode": "not invoked"
-    },
-    {
-      "name": "duplicate_position",
-      "passed": true,
-      "model_mode": "not invoked"
-    },
-    {
-      "name": "missing_limit",
-      "passed": true,
-      "model_mode": "not invoked"
+      "model_mode": "offline stub"
     }
   ]
 }

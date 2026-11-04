@@ -38,7 +38,6 @@ class Audit:
         self.validator.validate(event)
         try:
             self.path.parent.mkdir(parents=True, exist_ok=True)
-            # One request runs its client and server writes sequentially.
             with self.path.open("a", encoding="utf-8") as stream:
                 stream.write(json.dumps(event, ensure_ascii=False) + "\n")
                 stream.flush()

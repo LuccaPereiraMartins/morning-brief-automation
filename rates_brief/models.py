@@ -86,13 +86,14 @@ class Bucket(Record):
     limit: Decimal
     headroom: Decimal
     utilization: Decimal
-    status: Literal["within limit", "breached"]
+    status: Literal["within limit", "approaching limit", "breached"]
 
 
 class Risk(Record):
     converted: list[Converted]
     buckets: list[Bucket]
     by_currency: dict[str, Decimal]
+    warning_utilization: Decimal
 
 
 class Summary(Record):

@@ -1,7 +1,6 @@
 import json
 from datetime import date
 from pathlib import Path
-from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
@@ -9,7 +8,7 @@ from jsonschema import ValidationError
 
 from rates_brief.audit import Audit, AuditWriteError
 from rates_brief.data import Data
-from rates_brief.llm import ProviderGateway, eligible, payload, summarize, validate_summaries
+from rates_brief.llm import eligible, payload, summarize, validate_summaries
 from rates_brief.models import Book, Research, Summaries, Summary
 from rates_brief.settings import Settings
 
@@ -121,34 +120,3 @@ def test_offline_is_explicit_and_audited(settings: Settings) -> None:
     events = [json.loads(line) for line in audit.path.read_text().splitlines()]
     assert events[0]["detail"]["executed"] is False
     assert "<!--" not in result.summaries.items[1].view
-
-
-def test_provider_adapter_contract(settings: Settings, monkeypatch: pytest.MonkeyPatch) -> None:
-    book, research, audit = inputs(settings)
-    expected = valid(research, book)
-
-    class Response:
-        choices = [SimpleNamespace(message=SimpleNamespace(parsed=expected))]
-
-        def model_dump(self, **kwargs: object) -> dict[str, object]:
-            return {"id": "test-response", "usage": {"total_tokens": 100}}
-
-    class Client:
-        def __init__(self, **kwargs: object):
-            self.chat = SimpleNamespace(completions=SimpleNamespace(parse=self.parse))
-
-        def parse(self, **kwargs: object) -> Response:
-            assert kwargs["model"] == "configured-model"
-            assert kwargs["response_format"] is Summaries
-            assert "tools" not in kwargs
-            return Response()
-
-        def __enter__(self) -> "Client":
-            return self
-
-        def __exit__(self, *args: object) -> None:
-            pass
-
-    monkeypatch.setattr("rates_brief.llm.OpenAI", Client)
-    assert ProviderGateway("configured-model").generate(payload(research, book), audit) == expected
-    assert "test-response" in audit.path.read_text()

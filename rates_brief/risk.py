@@ -2,21 +2,31 @@ from collections import defaultdict
 from decimal import Decimal
 
 from rates_brief.models import Book, Bucket, Converted, Market, Risk
-from rates_brief.settings import Conventions
+from rates_brief.settings import DEFAULT_WARNING_UTILIZATION, Conventions
 
 
-def bucket(name: str, net: Decimal, limit: Decimal) -> Bucket:
+def bucket(name: str, net: Decimal, limit: Decimal, warning: Decimal) -> Bucket:
     return Bucket(
         bucket=name,
         net=net,
         limit=limit,
         headroom=limit - abs(net),
         utilization=abs(net) / limit,
-        status="breached" if abs(net) > limit else "within limit",
+        status=(
+            "breached"
+            if abs(net) > limit
+            else "approaching limit"
+            if abs(net) / limit >= warning
+            else "within limit"
+        ),
     )
 
 
-def calculate(book: Book, market: Market, config: Conventions) -> Risk:
+def calculate(
+    book: Book, market: Market, config: Conventions, warning: Decimal = DEFAULT_WARNING_UTILIZATION
+) -> Risk:
+    if not warning.is_finite() or not 0 < warning <= 1:
+        raise ValueError("Warning utilization must be greater than zero and at most one")
     converted = []
     nets: dict[str, Decimal] = defaultdict(Decimal)
     currencies: dict[str, Decimal] = defaultdict(Decimal)
@@ -70,16 +80,8 @@ def calculate(book: Book, market: Market, config: Conventions) -> Risk:
     return Risk(
         converted=converted,
         by_currency=dict(currencies),
-        buckets=[bucket(limit.bucket, nets[limit.bucket], limit.amount) for limit in book.limits],
+        warning_utilization=warning,
+        buckets=[
+            bucket(limit.bucket, nets[limit.bucket], limit.amount, warning) for limit in book.limits
+        ],
     )
-
-
-def scenario(risk: Risk, name: str, delta: Decimal) -> list[Bucket]:
-    if name == "TOTAL" or name not in {b.bucket for b in risk.buckets}:
-        raise ValueError("Scenario requires an existing maturity bucket")
-    if not delta.is_finite():
-        raise ValueError("Scenario DV01 must be finite")
-    return [
-        bucket(b.bucket, b.net + (delta if b.bucket in (name, "TOTAL") else 0), b.limit)
-        for b in risk.buckets
-    ]
