@@ -36,6 +36,10 @@ def inputs(settings: Settings) -> tuple[Book, Research, Audit, Summaries]:
 
 def test_model_references_and_numbers(settings: Settings) -> None:
     book, research, _, valid = inputs(settings)
+    # Bank C explicitly discusses Bund/gilt relative value: both positions are in this book.
+    eur = next(s for s in valid.items if "eur-swap-spreads" in s.document_id)
+    eur.position_ids = ["R-005", "R-008"]
+    valid.items[-1].view = "Book DV01 needs review."
     validate_summaries(valid, research, book)
     for change in [
         {"document_id": "unknown"},

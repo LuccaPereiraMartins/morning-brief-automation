@@ -1,13 +1,13 @@
 # Rates — 2026-10-28 — jim
 
-RATES_RV · EOD · offline stub
+RATES_RV · EOD · live
 
 **TOTAL: approaching limit — 92.8% used; USD 10,792.88/bp headroom.**
 
 ## Research
 
-- **Bank A / US:** “With the 10y at 4.35% and the market pricing barely one more cut this cycle, we think the long end has further to cheapen.” (R-001, R-002, R-003, R-004; [1])
-- **Internal / Global:** “UST 2s10s at 58bp and 5s30s at 106bp after yesterday&#x27;s bull flattening into the close.” (R-001, R-002, R-003, R-004, R-005, R-006, R-007, R-008; [2])
+- **Bank A / US:** Bank A expects further long-end Treasury cheapening and curve steepening, while remaining neutral on swap spreads. The Treasury curve and swap-spread discussion covers the listed UST and SOFR positions. (R-001, R-002, R-003, R-004; [1])
+- **Internal / Global:** Internal strategy reports a Treasury bull flattening and gilt outperformance, and flags book DV01 near its limit. The market commentary concerns the Treasury and gilt holdings; the DV01 warning is book-wide across the listed positions. (R-001, R-002, R-003, R-004, R-005, R-006, R-007, R-008; [2])
 
 ## DV01 — USD/bp
 
@@ -68,6 +68,6 @@ Currency contributions (USD/bp): EUR: 30,993.36; GBP: -50,186.24; USD: 158,400.0
 
 Limits (absolute signed net; total nets across currencies/curves): `positions/rates_limits.csv:2` (undated); `positions/rates_limits.csv:3` (undated); `positions/rates_limits.csv:4` (undated); `positions/rates_limits.csv:5` (undated)
 
-Audit request: `07135c12-47f2-4122-be16-3d6a1efd9ad2`. Local synthetic snapshot; no intraday notifications.
+Audit request: `a4c2ecb1-e2cc-4c42-8bf5-6b2d1b831b18`. Local synthetic snapshot; no intraday notifications.
 
 </details>

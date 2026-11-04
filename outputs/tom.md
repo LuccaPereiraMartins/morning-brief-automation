@@ -1,15 +1,15 @@
 # Rates — 2026-10-28 — tom
 
-RATES_RV · EOD · offline stub
+RATES_RV · EOD · live
 
 **TOTAL: approaching limit — 92.8% used; USD 10,792.88/bp headroom.**
 
 ## Research
 
-- **Bank A / US:** “With the 10y at 4.35% and the market pricing barely one more cut this cycle, we think the long end has further to cheapen.” (R-001, R-002, R-003, R-004; [1])
-- **Bank B / UK:** “We expect the MPC to hold Bank Rate on 5 November with a 6-3 vote, but with dovish guidance.” (R-005, R-006, R-007; [2])
-- **Bank C / Euro area:** “10y Bunds at 2.64% look cheap against swaps after the October supply.” (R-008; [3])
-- **Internal / Global:** “UST 2s10s at 58bp and 5s30s at 106bp after yesterday&#x27;s bull flattening into the close.” (R-001, R-002, R-003, R-004, R-005, R-006, R-007, R-008; [4])
+- **Bank A / US:** Bank A expects further long-end Treasury cheapening and remains neutral on swap spreads. The view covers intermediate and long Treasury holdings and Treasury and SOFR swap exposures. (R-001, R-002, R-003, R-004; [1])
+- **Bank B / UK:** Bank B expects a hold with dovish guidance, sees SONIA spreads as too negative, and flags hawkish inflation risk to the front end. The holdings covered are intermediate-maturity and long-end Gilts, plus SONIA swap exposure. (R-005, R-006, R-007; [2])
+- **Bank C / Euro area:** Bank C views intermediate Bunds as cheap versus swaps and sees value in Bund-Gilt spread tightening. This covers the intermediate Bund holding and the intermediate Gilt holding in the cross-market comparison. (R-008, R-005; [3])
+- **Internal / Global:** Internal strategy reports a Treasury bull flattening, Gilt outperformance, and total-book DV01 near its limit. The note covers Treasury curve exposure, Gilt performance and issuance, and the intermediate-maturity risk bucket across the book. (R-001, R-002, R-003, R-004, R-005, R-006, R-007, R-008; [4])
 
 ## DV01 — USD/bp
 
@@ -72,6 +72,6 @@ Currency contributions (USD/bp): EUR: 30,993.36; GBP: -50,186.24; USD: 158,400.0
 
 Limits (absolute signed net; total nets across currencies/curves): `positions/rates_limits.csv:2` (undated); `positions/rates_limits.csv:3` (undated); `positions/rates_limits.csv:4` (undated); `positions/rates_limits.csv:5` (undated)
 
-Audit request: `9eebd4b7-0ea7-4c97-949c-9b62f3a699aa`. Local synthetic snapshot; no intraday notifications.
+Audit request: `e8f17a79-3bc0-419a-a2e1-88bd2eff65e7`. Local synthetic snapshot; no intraday notifications.
 
 </details>
