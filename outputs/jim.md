@@ -1,6 +1,6 @@
 # Rates morning brief — jim
 
-Book: **RATES_RV** · Snapshot: **2026-10-28** · Request: `2fe7b951-ada8-447c-81e0-165e969a7140`
+Book: **RATES_RV** · Snapshot: **2026-10-28** · Request: `09bbcf6c-75e9-4f8b-995a-65232934d8f4`
 
 Research mode: **offline stub**. No model call was made; the research text below is quoted source material.
 
@@ -13,7 +13,9 @@ Synthetic data; end-of-day snapshot, not an intraday risk monitor.
 | 5Y | 69,500.00 | 100,000.00 | 69.5% | 30,500.00 | within limit |
 | 10Y | 48,557.04 | 120,000.00 | 40.5% | 71,442.96 | within limit |
 | 30Y | 21,150.08 | 50,000.00 | 42.3% | 28,849.92 | within limit |
-| TOTAL | 139,207.12 | 150,000.00 | 92.8% | 10,792.88 | within limit |
+| TOTAL | 139,207.12 | 150,000.00 | 92.8% | 10,792.88 | approaching limit |
+
+Warning at 90.0% utilization (configurable demonstration assumption; confirm with the PM). This flag reflects the supplied snapshot; it does not send a notification.
 
 DV01 is USD profit/loss for a one-basis-point fall in yields. Limits apply to absolute net DV01. Total nets all signed position exposures.
 
